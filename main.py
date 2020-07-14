@@ -1,6 +1,7 @@
 from flask_restful import Api
-
 from flask import Flask
+
+import datetime
 
 import resource
 
@@ -18,4 +19,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(port=8080, host='127.0.0.1')
+    app.run(port=8080, host='localhost')
