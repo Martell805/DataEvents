@@ -1,7 +1,0 @@
-7_1 event
-<EVENT>
-7_2 event
-<EVENT>
-7_3 event
-<EVENT>
-7_4 event
