@@ -1,7 +1,0 @@
-2_1 event
-<EVENT>
-2_2 event
-<EVENT>
-2_3 event
-<EVENT>
-2_4 event
