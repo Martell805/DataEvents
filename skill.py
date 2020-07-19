@@ -83,15 +83,11 @@ def main_skill(request, answer):
 
     cur_user = session.query(User).filter(User.id == user_id).all()
 
-    print(cur_user)
-
     if not cur_user:
         cur_user = User(user_id)
     else:
         cur_user = cur_user[0]
 
-    print(cur_user)
-    print(cur_user.date_times)
     date_times = cur_user.date_times.split()
     month = MONTHS[month]
     day = DAYS[day]
