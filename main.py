@@ -2,6 +2,7 @@ from flask_restful import Api
 from flask import Flask
 
 import datetime
+import json
 
 import resource
 
@@ -19,4 +20,6 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(host='localhost')
+    config = json.load(open('config.json'))
+    print(config)
+    app.run(host=config['HOST'], port=config['PORT'])
