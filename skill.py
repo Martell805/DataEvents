@@ -59,18 +59,39 @@ DAYS = {
 def main_skill(request, answer):
     # Кодить тут: request - запрос к нам, answer - то, что мы ответим
     # ------------------------------------------------------------------------
-    if 'этот день в истории ' not in request['request']['command'].lower():
+    request['request']['command'] += ' '
+
+    if 'этот день в истории' not in request['request']['command'].lower():
         answer['response']['text'] = f'Некорректный запрос'
         answer['response']['tts'] = answer['response']['text']
         answer['response']['end_session'] = True
         return answer
 
     date = request['request']['command'].lower().split('этот день в истории ')[1]
-    day, month = date.split()
+
+    if len(date.split()) not in [0, 2]:
+        answer['response']['text'] = f'Некорректная дата'
+        answer['response']['tts'] = answer['response']['text']
+        answer['response']['end_session'] = True
+        return answer
+
+    if date != '':
+        day, month = date.split()
+    else:
+        day, month = datetime.datetime.now().day, datetime.datetime.now().month
+        for key in DAYS:
+            if DAYS[key] == day:
+                day = key
+                break
+        for key in MONTHS:
+            if MONTHS[key] == month:
+                month = key
+                break
+        date = day + ' ' + month
 
     all_days = os.listdir('data/events')
 
-    if date + '.txt' not in all_days:
+    if date + '.txt' not in all_days and date != '':
         answer['response']['text'] = f'Дата {date} не внесена в мою базу данных'
         answer['response']['tts'] = answer['response']['text']
         answer['response']['end_session'] = True
